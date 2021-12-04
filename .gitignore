@@ -1,2 +1,7 @@
 .vscode
 
+#Windows only
+.vs
+
+build
+out

@@ -1,0 +1,10 @@
+^C:\USERS\YARIK\SOURCE\REPOS\SANSA\BUILD\CMAKEFILES\B5F64D2FA0A65454CF081F9CC3A7BCCF\GENERATE.STAMP.RULE
+setlocal
+C:\Dev\cmake\bin\cmake.exe -SC:/Users/yarik/source/repos/Sansa -BC:/Users/yarik/source/repos/Sansa/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/yarik/source/repos/Sansa/build/Sansa.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

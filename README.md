@@ -8,7 +8,7 @@ Sansa is
 
 - Abstraction for all objects
 
-- Incredible loggin
+- Incredible logging
 
 - Perfect performance
 
