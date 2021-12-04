@@ -1,9 +1,0 @@
-C:/Users/yarik/source/repos/Sansa/build/CMakeFiles/Experimental.dir
-C:/Users/yarik/source/repos/Sansa/build/CMakeFiles/Nightly.dir
-C:/Users/yarik/source/repos/Sansa/build/CMakeFiles/Continuous.dir
-C:/Users/yarik/source/repos/Sansa/build/CMakeFiles/NightlyMemoryCheck.dir
-C:/Users/yarik/source/repos/Sansa/build/CMakeFiles/sansa.dir
-C:/Users/yarik/source/repos/Sansa/build/CMakeFiles/RUN_TESTS.dir
-C:/Users/yarik/source/repos/Sansa/build/CMakeFiles/INSTALL.dir
-C:/Users/yarik/source/repos/Sansa/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/yarik/source/repos/Sansa/build/CMakeFiles/ZERO_CHECK.dir

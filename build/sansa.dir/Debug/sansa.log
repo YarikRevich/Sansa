@@ -1,5 +1,0 @@
-﻿  Building Custom Rule C:/Users/yarik/source/repos/Sansa/CMakeLists.txt
-  main.cpp
-C:\Users\yarik\source\repos\Sansa\src\main.cpp(1,10): fatal error C1083: Cannot open include file: 'glad/glad/glad.h': No such file or directory
-  texture.cpp
-  Generating Code...

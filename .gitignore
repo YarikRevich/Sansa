@@ -3,5 +3,7 @@
 #Windows only
 .vs
 
-build
-out
+build/*
+out/*
+
+CMakeSettings.json
