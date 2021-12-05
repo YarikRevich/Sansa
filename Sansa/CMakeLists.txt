@@ -3,7 +3,7 @@ add_library(sansa SHARED
             src/texture.cpp
             src/buffers.cpp
             src/window.cpp 
-            src/renderer.cpp)
+            src/renderer.cpp "src/shader.hpp" "src/shader.cpp")
 link_libraries(sansa 
             libglfw.3.3.dylib
             libglad.a)

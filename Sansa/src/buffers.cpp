@@ -6,10 +6,10 @@ Sansa::IndexBuffer::IndexBuffer()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Renderer);
 }
 
-void Sansa::IndexBuffer::Bind()
+void Sansa::IndexBuffer::Bind() const
 {
 }
 
-void Sansa::IndexBuffer::Unbind()
+void Sansa::IndexBuffer::Unbind() const
 {
 }

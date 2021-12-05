@@ -6,12 +6,14 @@ namespace Sansa
 {
     class IndexBuffer{
         private:
-            unsigned int counter;
+            unsigned int m_Count;
             unsigned int m_Renderer;
         public:
             IndexBuffer();
 
-            void Bind();
-            void Unbind();
+            void Bind() const;
+            void Unbind() const;
+
+            inline unsigned int GetCount() { return m_Count; };
     };
 } // namespace Sansa

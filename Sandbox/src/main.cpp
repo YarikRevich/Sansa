@@ -1,83 +1,31 @@
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-#include <iostream>
-#include <stdlib.h>
-#include <experimental/filesystem>
+//#include "glad/glad.h"
+//#include "GLFW/glfw3.h"
+//#include <iostream>
+//#include <stdlib.h>
 
-#include "loader.hpp"
-#include "error.hpp"
 
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
+//#include "loader.hpp"
+//#include "error.hpp"
+//
+//#include "glm/glm.hpp"
+//#include "glm/matrix_transform.hpp"
 
-#include "renderer.hpp"
-#include "indexBuffer.hpp"
-#include "vertexBuffer.hpp"
+//#include "pch.hpp"
 
-using glm::mat4;
-using glm::vec3;
+//#include "renderer.hpp"
+//#include "indexBuffer.hpp"
+//#include "vertexBuffer.hpp"
+//
+//using glm::mat4;
+//using glm::vec3;
+#include 
 
-static unsigned int CompileShader(unsigned int type, const std::string &src)
-{
-    unsigned int id = glCreateShader(type);
-    const char *s = src.c_str();
-    glShaderSource(id, 1, &s, nullptr);
-    glCompileShader(id);
+using namespace Sansa;
 
-    OpenGL::ShaderErrorCatcher(id, "shader error", [&] {});
-
-    return id;
-}
-
-static unsigned int CreateShader(const std::string &vertexShader, const std::string &fragmentShader)
-{
-    unsigned int program = glCreateProgram();
-    unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
-    unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
-
-    glAttachShader(program, vs);
-    glAttachShader(program, fs);
-
-    glLinkProgram(program);
-    glValidateProgram(program);
-
-    glDeleteShader(vs);
-    glDeleteShader(fs);
-
-    return program;
-}
 
 int main(int argc, char **argv)
 {
-    GLFWwindow *window;
-
-    if (!glfwInit())
-    {
-        return -1;
-    }
-
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
-
-    window = glfwCreateWindow(640, 400, "Hello world", NULL, NULL);
-
-    glfwMakeContextCurrent(window);
-    if (!window)
-    {
-        glfwTerminate();
-        return -1;
-    }
-
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout << "Failed to initialize OpenGL context" << std::endl;
-        return -1;
-    }
+    auto window = Window::CreateWindow(100, 200, "Sandbox");
 
     float positions[6] = {
         -0.2f, -0.5f,
@@ -85,17 +33,20 @@ int main(int argc, char **argv)
         0.2f, -0.5f,
     };
 
-    float texpositions[6] = {
-        -0.2f,
-        -0.5f,
-        0.0f,
-        0.2f,
-        0.2f,
-        -0.5f,
-    };
+   /* floatf texpositions[6] = {
+        -0.f2f, -0.5f,
+           f0.0f, 0.2f,
+           f0.2f, -0.5f,
+    };*/   
+           
 
-    {
-        unsigned int vao;
+
+
+
+
+
+    
+   /*     unsigned int vao;
         glGenVertexArrays(1, &vao);
         glBindVertexArray(vao);
 
@@ -113,20 +64,27 @@ int main(int argc, char **argv)
 
         unsigned int shader = CreateShader(l.GetVertexShader(), l.GetFragmentShader());
 
-        glUseProgram(shader);
+        glUseProgram(shader);*/
+
+
+
+
+
+
+
 
         ///////////////////////////////
 
-        unsigned int blockIndex = glGetUniformBlockIndex(shader, "BlobSettings");
+        //unsigned int blockIndex = glGetUniformBlockIndex(shader, "BlobSettings");
 
-        int blockSize;
-        glGetActiveUniformBlockiv(shader, blockIndex, GL_UNIFORM_BLOCK_DATA_SIZE, &blockSize);
+        //int blockSize;
+        //glGetActiveUniformBlockiv(shader, blockIndex, GL_UNIFORM_BLOCK_DATA_SIZE, &blockSize);
 
-        const char *names[] = {"InnerColor", "OuterColor", "InnerRadius", "OuterRadius"};
-        unsigned int indeces[4];
-        glGetUniformIndices(shader, 4, names, indeces);
+        //const char *names[] = {"InnerColor", "OuterColor", "InnerRadius", "OuterRadius"};
+        //unsigned int indeces[4];
+        //glGetUniformIndices(shader, 4, names, indeces);
 
-        int offsets[4];
+    /*    int offsets[4];
         glGetActiveUniformsiv(shader, 4, indeces, GL_UNIFORM_OFFSET, offsets);
 
         float outerColor[] = {
@@ -141,57 +99,75 @@ int main(int argc, char **argv)
             1.0f,
             1.0f,
             1.0f,
-        };
+        };*/
 
-        float innerRadius = 0.2f, outerRadius = 0.5f;
+        //float innerRadius = 0.2f, outerRadius = 0.5f;
 
-        GLubyte *blockBuffer = (GLubyte *)malloc(sizeof(blockSize));
+        //GLubyte *blockBuffer = (GLubyte *)malloc(sizeof(blockSize));
 
-        std::memcpy(blockBuffer + offsets[0], innerColor, 4 * sizeof(float));
-        std::memcpy(blockBuffer + offsets[1], outerColor, 4 * sizeof(float));
-        std::memcpy(blockBuffer + offsets[2], &innerRadius, sizeof(float));
-        std::memcpy(blockBuffer + offsets[3], &outerRadius, sizeof(float));
+        //std::memcpy(blockBuffer + offsets[0], innerColor, 4 * sizeof(float));
+        //std::memcpy(blockBuffer + offsets[1], outerColor, 4 * sizeof(float));
+        //std::memcpy(blockBuffer + offsets[2], &innerRadius, sizeof(float));
+        //std::memcpy(blockBuffer + offsets[3], &outerRadius, sizeof(float));
 
-        unsigned int uniformBuffer;
-        glGenBuffers(1, &uniformBuffer);
-        glBindBuffer(GL_UNIFORM_BUFFER, uniformBuffer);
-        glBufferData(GL_UNIFORM_BUFFER, blockSize, blockBuffer, GL_STATIC_DRAW);
+        //unsigned int uniformBuffer;
+        //glGenBuffers(1, &uniformBuffer);
+        //glBindBuffer(GL_UNIFORM_BUFFER, uniformBuffer);
+        //glBufferData(GL_UNIFORM_BUFFER, blockSize, blockBuffer, GL_STATIC_DRAW);
 
-        glBindBufferBase(GL_UNIFORM_BUFFER, blockIndex, uniformBuffer);
+        //glBindBufferBase(GL_UNIFORM_BUFFER, blockIndex, uniformBuffer);
 
         ///////////////////////////////
 
-        glBindVertexArray(0);
+
+
+
+
+        //vao.Unbind()
+        //ib.Unbind()
+        //shader.Unbind()
+
+
+
+
+     /*   glBindVertexArray(0);
         glUseProgram(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindBuffer(GL_UNIFORM_BUFFER, 0);
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);*/
 
-        while (!glfwWindowShouldClose(window))
-        {
-            glClear(GL_COLOR_BUFFER_BIT);
+        //while (!glfwWindowShouldClose(window))
+        //{
+     /*       ear(GL_COLOR_BUFFER_BIT)*/
 
-            glUseProgram(shader);
+            //Renderer::Clear()
 
-            mat4 rotationMatrix = glm::rotate(mat4(1.0f), 40.0f, vec3(0.0, 0.0, 1.0));
+            //shader.Bind()
+            //vao.Bind()
 
-            unsigned int location = glGetUniformLocation(shader, "RotationMatrix");
-            if (location >= 0)
-            {
-                glUniformMatrix4fv(location, 1, GL_FALSE, &rotationMatrix[0][0]);
-            }
+            //Renderer::Draw()
 
-            glBindVertexArray(vao);
+            //glUseProgram(shader);
 
-            glDrawArrays(GL_TRIANGLES, 0, 3);
+            //mat4 rotationMatrix = glm::rotate(mat4(1.0f), 40.0f, vec3(0.0, 0.0, 1.0));
 
-            glfwSwapBuffers(window);
+            //unsigned int location = glGetUniformLocation(shader, "RotationMatrix");
+            //if (location >= 0)
+            //{
+            //    glUniformMatrix4fv(location, 1, GL_FALSE, &rotationMatrix[0][0]);
+            //}
 
-            glfwPollEvents();
-        };
+            //glBindVertexArray(vao);
 
-        glDeleteProgram(shader);
-    }
+            //glDrawArrays(GL_TRIANGLES, 0, 3);
 
-    glfwTerminate();
+            //glfwSwapBuffers(window);
+
+            //////glfwPollEvents();
+        //};
+
+        //glDeleteProgram(shader);
+    //}
+
+    //glfwTerminate();
     return 0;
 }

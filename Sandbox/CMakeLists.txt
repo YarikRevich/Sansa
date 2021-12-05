@@ -1,6 +1,7 @@
 add_executable(sanbox src/main.cpp) 
 
-link_libraries(sanbox 
+link_libraries(sanbox
+            sansa.dll
             libglfw.3.3.dylib
             libglad.a)
 

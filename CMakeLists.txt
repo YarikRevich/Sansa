@@ -5,6 +5,7 @@ include(CTest)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${RUNTIME_OUTPUT_DIRECTORY}/bin)
 
 include_directories(${CMAKE_SOURCE_DIR}/vendor/include)
+include_directories(${CMAKE_SOURCE_DIR}/Sansa/include)
 link_directories(${CMAKE_SOURCE_DIR}/vendor/lib)
 
 
