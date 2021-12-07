@@ -1,3 +1,5 @@
+#pragma once
+
 #include <memory.h>
 #include "spdlog/spdlog.h"
 
@@ -14,7 +16,8 @@ namespace Sansa{
     };
 };
 
-#define GL_LOG(x) GLClearError();\
+#define GL_LOG(x) \
+    GLClearError();\
     x;\
     GLLogCall(#x);
 
@@ -27,7 +30,7 @@ static void GLClearError() {
 #define LOG_WARN(...) Sansa::Logger::GetLogger()->warn(__VA_ARGS__);
 #define LOG_DEBUG(...) Sansa::Logger::GetLogger()->debug(__VA_ARGS__);
 
-static void GLLogCall(char* functionName) {
+static void GLLogCall(std::string functionName) {
     while (GLenum error = glGetError()) {
         LOG_ERROR("GL_ERROR ", "Function ", functionName, " ", "File: ", __FILE__, " ", "Line: ", __LINE__, " ");
         std::cout << error << std::endl;

@@ -17,8 +17,9 @@
 //#include "vertexBuffer.hpp"
 //
 //using glm::mat4;
-//using glm::vec3;
-#include 
+//using glm::vec3; 
+
+#include "window.hpp"
 
 using namespace Sansa;
 

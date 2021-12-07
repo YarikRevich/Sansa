@@ -2,7 +2,8 @@
 
 #include "pch.hpp"
 #include "vao.hpp"
-#include "buffers.hpp"
+// #include "buffers.hpp"
+#include "ib.hpp"
 #include "log.hpp"
 #include "shader.hpp"
 

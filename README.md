@@ -1,6 +1,6 @@
  #Sansa
 
-_*Sansa is an OpenGL light weight abstraction which allows to forget routine work*_
+_*Sansa is an OpenGL|Vulkan light weight abstraction which allows to forget routine work*_
 
 []()
 

@@ -3,7 +3,7 @@
 
 Sansa::VAO::VAO()
 {
-	glGenVertexArrays(1, &m_RendererID)
+	glGenVertexArrays(1, &m_RendererID);
 }
 
 Sansa::VAO::~VAO()
@@ -27,10 +27,10 @@ void Sansa::VAO::AddBuffer(const VBO& vb, const VBOLayout& layout)
 
 void Sansa::VAO::Bind() const
 {
-	glBindVertexArray(GL_VERTEX_ARRAY, m_RendererID);
+	glBindVertexArray(m_RendererID);
 }
 
 void Sansa::VAO::Unbind() const
 {
-	glBindVertexArray(GL_VERTEX_ARRAY, 0);
+	glBindVertexArray(0);
 }

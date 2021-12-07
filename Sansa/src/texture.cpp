@@ -7,6 +7,11 @@ Sansa::Texture::Texture()
 
 void Sansa::Texture::Bind() const
 {
+	// #ifdef VULKAN_SANSA
+	
+	// #elif defined(OPENGL_SANSA)
+
+	// #endif
 }
 
 void Sansa::Texture::Unbind() const

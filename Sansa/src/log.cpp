@@ -1,7 +1,9 @@
 #include "log.hpp"
+#include "spdlog/sinks/stdout_color_sinks.h"
 
 namespace Sansa
 {
+    std::shared_ptr<spdlog::logger> Logger::s_Logger = nullptr;
     void Logger::Init()
     {
         spdlog::set_pattern("%^[%T] %n: %v%$");

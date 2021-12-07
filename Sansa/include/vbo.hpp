@@ -5,9 +5,9 @@
 namespace Sansa{
     class VBO{
         private:
-            int m_RendererID;
+            unsigned int m_RendererID;
         public:
-            VBO();
+            VBO(const void*, unsigned int);
             ~VBO();
 
             void Bind() const;

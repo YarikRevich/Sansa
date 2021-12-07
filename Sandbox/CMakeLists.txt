@@ -1,7 +1,9 @@
+link_directories(${CMAKE_SOURCE_DIR}/build/bin)
+
 add_executable(sanbox src/main.cpp) 
 
-link_libraries(sanbox
-            sansa.dll
+target_link_libraries(sanbox
+            libsansa.dylib
             libglfw.3.3.dylib
             libglad.a)
 

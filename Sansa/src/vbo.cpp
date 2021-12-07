@@ -1,22 +1,25 @@
 #include "vbo.hpp"
 #include "log.hpp"
 
-Sansa::VBO::VBO()
+Sansa::VBO::VBO(const void* data, unsigned int size)
 {
-	glGenBuffers(1, &m_RendererID)
+	
+	GL_LOG(glGenBuffers(1, &m_RendererID));
+	GL_LOG(glBindBuffer(GL_ARRAY_BUFFER, m_RendererID));
+	GL_LOG(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
 }
 
 Sansa::VBO::~VBO()
 {
-	glDeleteBuffers(1, &m_RendererID);
+	GL_LOG(glDeleteBuffers(1, &m_RendererID));
 }
 
 void Sansa::VBO::Bind() const
 {
-	glBindBuffer(GL_BUFFER, m_RendererID)
+	GL_LOG(glBindBuffer(GL_ARRAY_BUFFER, m_RendererID));
 }
 
 void Sansa::VBO::Unbind() const
 {
-	glBindBuffer(GL_BUFFER, 0)
+	GL_LOG(glBindBuffer(GL_BUFFER, 0));
 }
