@@ -29,25 +29,29 @@ Sansa::ShaderBundle Sansa::ShaderLoader::LoadShader(const std::string &file)
 			if (line.find("vertex") != std::string::npos)
 			{
 				type = ShaderType::VERTEX;
+				continue;
 			}
 			else if (line.find("fragment") != std::string::npos)
 			{
 				type = ShaderType::FRAGMENT;
+				continue;
 			}
 		}
 
 		switch (type)
 		{
 		case ShaderType::VERTEX:
-			vertexShader << line;
+			vertexShader << line << "\n";
+			break;
 		case ShaderType::FRAGMENT:
-			fragmentShader << line;
+			fragmentShader << line << "\n";
+			break;
 		case ShaderType::NONE:
 			continue;
 		};
 	}
 
-	return {vertexShader.str(), fragmentShader.str()};
+	return {fragmentShader.str(), vertexShader.str()};
 }
 
 std::vector<Sansa::ShaderBundle> Sansa::ShaderLoader::LoadShadersInDir(const std::string &dir)
@@ -75,36 +79,53 @@ unsigned int Sansa::Shader::CompileShader(unsigned int type, const std::string &
 	const char *s = src.c_str();
 	GL_LOG(glShaderSource(id, 1, &s, nullptr));
 	GL_LOG(glCompileShader(id));
+
+	int status;
+	glGetShaderiv(id, GL_COMPILE_STATUS, &status);
+	if (!status)
+	{
+		int length = 0;
+		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
+		if (length)
+		{
+			std::string log;
+			glGetShaderInfoLog(id, length, nullptr, &log[0]);
+			LOG_ERROR(log.c_str(), (type == GL_VERTEX_SHADER ? "vertex shader" : "fragment shader"));
+		}
+		glDeleteShader(id);
+	}
+
 	return id;
 }
 
 unsigned int Sansa::Shader::CreateShader(const std::string &vs, const std::string &fs)
 {
-
-	unsigned int program = glCreateProgram();
+	GL_LOG(unsigned int program = glCreateProgram());
 	unsigned int idvs = CompileShader(GL_VERTEX_SHADER, vs);
 	unsigned int idfs = CompileShader(GL_FRAGMENT_SHADER, fs);
 
-	glAttachShader(program, idvs);
-	glAttachShader(program, idfs);
+	GL_LOG(glAttachShader(program, idvs));
+	GL_LOG(glAttachShader(program, idfs));
 
-	glLinkProgram(program);
-	glValidateProgram(program);
+	GL_LOG(glLinkProgram(program));
+	GL_LOG(glValidateProgram(program));
 
-	glDeleteShader(idvs);
-	glDeleteShader(idfs);
+	GL_LOG(glDeleteShader(idvs));
+	GL_LOG(glDeleteShader(idfs));
 
 	return program;
 }
 
 Sansa::Shader::Shader(ShaderBundle bundle)
 {
-	m_RendererID = CreateShader(bundle.Vertex, bundle.Fragment);
+	this->m_RendererID = CreateShader(bundle.Vertex, bundle.Fragment);
+	Bind();
 }
 
 Sansa::Shader::~Shader()
 {
-	glDeleteProgram(m_RendererID);
+
+	GL_LOG(glDeleteProgram(m_RendererID));
 }
 
 void Sansa::Shader::Bind() const
@@ -119,6 +140,5 @@ void Sansa::Shader::Unbind() const
 
 void Sansa::Shader::SetUniform4f(const std::string &name, float v0, float v1, float v2, float v3)
 {
-	auto location = GetUniformLocation(name);
-	glUniform4f(location, v0, v1, v2, v3);
+	GL_LOG(glUniform4f(GetUniformLocation(name), v0, v1, v2, v3));
 }

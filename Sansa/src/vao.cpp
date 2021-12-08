@@ -4,6 +4,7 @@
 Sansa::VAO::VAO()
 {
 	glGenVertexArrays(1, &m_RendererID);
+	Bind();
 }
 
 Sansa::VAO::~VAO()

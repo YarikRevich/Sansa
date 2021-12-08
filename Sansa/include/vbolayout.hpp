@@ -25,18 +25,18 @@ namespace Sansa
 			if constexpr (std::is_same<T, float>::value)
 			{
 				m_Elements.push_back({count, GL_FLOAT, false});
-				m_Stride = sizeof(GL_FLOAT);
+				m_Stride += count * sizeof(GL_FLOAT);
 			}
 			if constexpr (std::is_same<T, unsigned int>::value)
 			{
 				m_Elements.push_back({count, GL_UNSIGNED_INT, false});
-				m_Stride = sizeof(GL_UNSIGNED_INT);
+				m_Stride += count * sizeof(GL_UNSIGNED_INT);
 			}
 
 			if constexpr (std::is_same<T, char>::value)
 			{
 				m_Elements.push_back({count, GL_BYTE, true});
-				m_Stride = sizeof(GL_BYTE);
+				m_Stride += count * sizeof(GL_BYTE);
 			}
 		};
 

@@ -3,7 +3,7 @@
 Sansa::IndexBuffer::IndexBuffer(const void *data, unsigned int count)
 {
     GL_LOG(glGenBuffers(1, &m_RendererID));
-    GL_LOG(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID));
+    Bind();
     GL_LOG(glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(unsigned int), data, GL_STATIC_DRAW));
 }
 

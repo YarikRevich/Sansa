@@ -22,7 +22,7 @@ namespace Sansa{
     GLLogCall(#x);
 
 static void GLClearError() {
-    while (!glGetError());
+    while (glGetError() != GL_NO_ERROR);
 };
 
 
@@ -32,8 +32,7 @@ static void GLClearError() {
 
 static void GLLogCall(std::string functionName) {
     while (GLenum error = glGetError()) {
-        LOG_ERROR("GL_ERROR ", "Function ", functionName, " ", "File: ", __FILE__, " ", "Line: ", __LINE__, " ");
-        std::cout << error << std::endl;
+        std::cout << "GL_ERROR " << error << " Function " << functionName << " " << "File: " << __FILE__ << " " << "Line: " << __LINE__ << " " << std::endl;
     }
 };
 

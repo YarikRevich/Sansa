@@ -1,6 +1,8 @@
 #include "window.hpp"
 #include "log.hpp"
 
+#include "pch.hpp"
+
 GLFWwindow* Sansa::Window::CreateWindow(const int width, const int height, const char *name)
 {
     Sansa::Logger::Init();
