@@ -130,7 +130,7 @@ Sansa::Shader::~Shader()
 
 void Sansa::Shader::Bind() const
 {
-	GL_LOG(glUseProgram(m_RendererID));
+	glUseProgram(m_RendererID);
 }
 
 void Sansa::Shader::Unbind() const

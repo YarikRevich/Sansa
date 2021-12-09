@@ -25,6 +25,7 @@
 #include "ib.hpp"
 #include "shader.hpp"
 #include "renderer.hpp"
+#include "objloader.hpp"
 
 using namespace Sansa;
 
@@ -32,37 +33,46 @@ int main(int argc, char **argv)
 {
     GLFWwindow *window = Window::CreateWindow(600, 800, "Sandbox");
 
-    float positions[8] = {
-        -0.5f,
-        -0.5f,
+    // float positions[20] = {
+    //     //front
+    //     -0.5f, -0.5f,
+    //     0.5f, -0.5f,
+    //     0.5f, 0.5f,
+    //     -0.5f, 0.5f,
 
-        0.5f,
-        -0.5f,
+    //     //right
+    //     -0.3f, -0.3f,
+    //     0.7f, -0.3f,
+    //     0.7f, 0.7f,
 
-        0.5f,
-        0.5f,
-        -0.5f,
-        0.5f,
-    };
+    //     //top
+    //     -0.17f, 0.7f,
+    // };
 
-    unsigned int indecies[6] = {
-        0,
-        1,
-        2,
-        2,
-        3,
-        0,
-    };
+    // unsigned int indecies[19] = {
+    //     0, 1, 2,
+    //     2, 3, 0,
+
+    //     1, 5, 6,
+    //     6, 2, 1,
+
+    //     3, 2, 6,
+    //     6, 7, 3,
+    // };
 
     VAO vao;
-    
-    VBO vb(positions, 4 * 2 * sizeof(float));
-    IndexBuffer ib(indecies, 6 * sizeof(unsigned int));
+
+    std::vector<glm::vec3> positions;
+    std::vector<int> indecies;
+
+    OBJLoader model("models/teapot.obj", positions, indecies);
+
+    VBO vb(&positions[0], sizeof(positions) * sizeof(float));
+    IndexBuffer ib(&indecies[0], sizeof(indecies));
 
     VBOLayout layout;
     layout.Push<float>(2);
 
-    
     vao.AddBuffer(vb, layout);
 
     Shader shader(ShaderLoader::LoadShader("shaders/base.glsl"));
@@ -146,11 +156,13 @@ int main(int argc, char **argv)
     // shader.Unbind();
 
     vao.Unbind();
-    shader.Unbind();
+    // shader.Unbind();
+    // shader.Bind();
     {
         while (!glfwWindowShouldClose(window))
         {
             Renderer::Clear();
+            // glClearColor(0.1, 0.2, 1.0, 1.0);
             Renderer::Draw(vao, ib, shader);
 
             // GL_LOG(glClear(GL_COLOR_BUFFER_BIT));
@@ -182,7 +194,7 @@ int main(int argc, char **argv)
             glfwSwapBuffers(window);
             glfwPollEvents();
         };
-    }
+    };
 
     glfwTerminate();
     return 0;

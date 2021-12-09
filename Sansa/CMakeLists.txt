@@ -8,7 +8,9 @@ add_library(sansa SHARED
             src/log.cpp
             src/vao.cpp
             src/ib.cpp
-            src/vbo.cpp)
+            src/vbo.cpp
+            src/objloader.cpp
+            )
 target_link_libraries(sansa 
             libglfw.3.3.dylib
             libglad.a)

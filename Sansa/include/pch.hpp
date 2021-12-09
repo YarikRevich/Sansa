@@ -14,9 +14,11 @@
 #include <filesystem>
 #endif
 
+#include <functional>
 
 #include <sstream>
 
 
+#include "glm/glm.hpp"
 #include "glad/glad.h"
 #include "glfw/GLFW/glfw3.h"

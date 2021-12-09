@@ -1,6 +1,6 @@
 #include "ib.hpp"
 
-Sansa::IndexBuffer::IndexBuffer(const void *data, unsigned int count)
+Sansa::IndexBuffer::IndexBuffer(const void *data, unsigned int count) : m_Count(count)
 {
     GL_LOG(glGenBuffers(1, &m_RendererID));
     Bind();
@@ -14,7 +14,7 @@ Sansa::IndexBuffer::~IndexBuffer()
 
 void Sansa::IndexBuffer::Bind() const
 {
-    GL_LOG(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID));
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
 }
 
 void Sansa::IndexBuffer::Unbind() const
