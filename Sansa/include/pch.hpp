@@ -1,7 +1,6 @@
 #pragma once
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+
 
 #include <string>
 #include <iostream>
@@ -25,7 +24,9 @@
 #include "glm/glm.hpp"
 #include "glad/glad.h"
 
-#ifdef ENABLE_VK
-#define GLFW_ENABLE_VULKAN
+#include "stb_image/stb_image.h"
+
+// #ifdef ENABLE_VK
+// #define GLFW_ENABLE_VULKAN
 #include "glfw/GLFW/glfw3.h"
-#endif
+// #endif

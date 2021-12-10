@@ -20,8 +20,8 @@ void Sansa::VAO::AddBuffer(const VBO& vb, const VBOLayout& layout)
 	unsigned int offset = 0;
 	for (int i = 0; i < elements.size(); ++i) {
 		auto element = elements[i];
-		GL_LOG(glEnableVertexAttribArray(0));
-		GL_LOG(glVertexAttribPointer(0, element.count, element.type, element.normilized, layout.GetStride(), (const void*)offset));
+		GL_LOG(glEnableVertexAttribArray(i));
+		GL_LOG(glVertexAttribPointer(i, element.count, element.type, element.normilized, layout.GetStride(), (const void*)offset));
 		offset += element.count;
 	}
 }

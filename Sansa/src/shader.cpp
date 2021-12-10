@@ -81,18 +81,18 @@ unsigned int Sansa::Shader::CompileShader(unsigned int type, const std::string &
 	GL_LOG(glCompileShader(id));
 
 	int status;
-	glGetShaderiv(id, GL_COMPILE_STATUS, &status);
+	GL_LOG(glGetShaderiv(id, GL_COMPILE_STATUS, &status));
 	if (!status)
 	{
 		int length = 0;
-		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
+		GL_LOG(glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length));
 		if (length)
 		{
 			std::string log;
-			glGetShaderInfoLog(id, length, nullptr, &log[0]);
+			GL_LOG(glGetShaderInfoLog(id, length, nullptr, &log[0]));
 			LOG_ERROR(log.c_str(), (type == GL_VERTEX_SHADER ? "vertex shader" : "fragment shader"));
 		}
-		glDeleteShader(id);
+		GL_LOG(glDeleteShader(id));
 	}
 
 	return id;
@@ -130,7 +130,7 @@ Sansa::Shader::~Shader()
 
 void Sansa::Shader::Bind() const
 {
-	glUseProgram(m_RendererID);
+	GL_LOG(glUseProgram(m_RendererID));
 }
 
 void Sansa::Shader::Unbind() const
@@ -141,4 +141,11 @@ void Sansa::Shader::Unbind() const
 void Sansa::Shader::SetUniform4f(const std::string &name, float v0, float v1, float v2, float v3)
 {
 	GL_LOG(glUniform4f(GetUniformLocation(name), v0, v1, v2, v3));
+}
+
+void Sansa::Shader::SetUniform1i(const std::string& name, int v0){
+	GL_LOG(glUniform1i(GetUniformLocation(name), v0));
+	int r;
+	glGetUniformiv(m_RendererID, 0, &r);
+	std::cout << "name " << name << " " <<  r << std::endl;
 }

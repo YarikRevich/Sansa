@@ -1,7 +1,10 @@
 #include "window.hpp"
 #include "log.hpp"
 
+#define STB_IMAGE_IMPLEMENTATION
 #include "pch.hpp"
+
+
 
 GLFWwindow* Sansa::Window::CreateWindow(const int width, const int height, const char *name)
 {

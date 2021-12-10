@@ -10,6 +10,7 @@ add_library(sansa SHARED
             src/ib.cpp
             src/vbo.cpp
             src/objloader.cpp
+            src/stb_image.cpp
             )
 target_link_libraries(sansa 
             libglfw.3.3.dylib

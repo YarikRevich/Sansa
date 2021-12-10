@@ -26,6 +26,7 @@
 #include "shader.hpp"
 #include "renderer.hpp"
 #include "objloader.hpp"
+#include "texture.hpp"
 
 using namespace Sansa;
 
@@ -33,49 +34,73 @@ int main(int argc, char **argv)
 {
     GLFWwindow *window = Window::CreateWindow(600, 800, "Sandbox");
 
-    // float positions[20] = {
-    //     //front
-    //     -0.5f, -0.5f,
-    //     0.5f, -0.5f,
-    //     0.5f, 0.5f,
-    //     -0.5f, 0.5f,
+    //  -0.5f, -0.5f,  
+    //     0.5f, -0.5f,   
+    //     0.5f, 0.5f,    
+    //     -0.5f, 0.5f,   
 
-    //     //right
-    //     -0.3f, -0.3f,
-    //     0.7f, -0.3f,
-    //     0.7f, 0.7f,
+    float positions[] = {
+        // front
+        -0.5f, -0.5f, 0.0f, 0.0f,  
+        0.5f, -0.5f,  1.0f, 0.0f,
+        0.5f, 0.5f,   1.0f, 1.0f,
+        -0.5f, 0.5f,  0.0f, 1.0f,
 
-    //     //top
-    //     -0.17f, 0.7f,
-    // };
+        // // right
+        // -0.3f,-0.3f,
+        // 0.7f,-0.3f,
+        // 0.7f,0.7f,
 
-    // unsigned int indecies[19] = {
-    //     0, 1, 2,
-    //     2, 3, 0,
+        // // top
+        // -0.17f, 0.7f,
+    };
 
-    //     1, 5, 6,
-    //     6, 2, 1,
+    unsigned int indecies[] = {
+        0,
+        1,
+        2,
+        2,
+        3,
+        0,
 
-    //     3, 2, 6,
-    //     6, 7, 3,
-    // };
+        // 1,
+        // 5,
+        // 6,
+        // 6,
+        // 2,
+        // 1,
+
+        // 3,
+        // 2,
+        // 6,
+        // 6,
+        // 7,
+        // 3,
+    };
 
     VAO vao;
 
-    std::vector<glm::vec3> positions;
-    std::vector<int> indecies;
+    // std::vector<glm::vec3> positions;
+    // std::vector<int> indecies;
 
-    OBJLoader model("models/teapot.obj", positions, indecies);
+    // OBJLoader model("models/teapot.obj", positions, indecies);
 
-    VBO vb(&positions[0], sizeof(positions) * sizeof(float));
-    IndexBuffer ib(&indecies[0], sizeof(indecies));
+    VBO vb(positions, sizeof(positions) * sizeof(float));
+    IndexBuffer ib(indecies, sizeof(indecies));
 
     VBOLayout layout;
+    layout.Push<float>(2);
     layout.Push<float>(2);
 
     vao.AddBuffer(vb, layout);
 
     Shader shader(ShaderLoader::LoadShader("shaders/base.glsl"));
+
+    Texture texture("textures/example.png");
+    texture.Bind();
+    
+    shader.SetUniform1i("u_Texture", 0);
+    
 
     /*     unsigned int vao;
          glGenVertexArrays(1, &vao);
@@ -156,12 +181,25 @@ int main(int argc, char **argv)
     // shader.Unbind();
 
     vao.Unbind();
+    shader.Unbind();
     // shader.Unbind();
     // shader.Bind();
     {
         while (!glfwWindowShouldClose(window))
         {
             Renderer::Clear();
+
+            shader.Bind();
+            shader.SetUniform1i("u_Texture", 0);
+            
+            // Renderer::SetUniforms(
+            //     [&]()
+            //     {
+            //         shader.SetUniform1i("texId", 0);
+            //     });
+
+                // shader.SetUniform1i("texId", 0);
+
             // glClearColor(0.1, 0.2, 1.0, 1.0);
             Renderer::Draw(vao, ib, shader);
 
