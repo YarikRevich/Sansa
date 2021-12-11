@@ -94,7 +94,7 @@ int main(int argc, char **argv)
 
     vao.AddBuffer(vb, layout);
 
-    Shader shader(ShaderLoader::LoadShader("shaders/base.glsl"));
+    Shader shader(ShaderLoader::LoadShader("../../Sandbox/shaders/base.glsl"));
 
     Texture texture("textures/example.png");
     texture.Bind();

@@ -1,20 +1,26 @@
 #type vertex
-#version core 410
+#version 410 core
 
-in vec3 Coord;
+layout(location = 0) in vec4 VertexPosition;
+layout(location = 1) in vec2 VertexTexCoord;
+
+out vec2 TexCoord;
 
 void main(){
-	gl_Position = Coord;
+	TexCoord = VertexTexCoord;
+	gl_Position = VertexPosition;
 }
 
 #type fragment
+#version 410 core
 
-#version core 410
+out vec4 color;
+in vec2 TexCoord;
 
-#ifdef GL_ES
-precision mediump float
-#endif
+uniform sampler2D u_Texture;
 
 void main(){
-	gl_FragColor = vec4(1.0, 1.0, 0.5, 1.0);
+	vec4 tex = texture(u_Texture, TexCoord);
+	// color = vec4(1.0, 0.5, 0.9, 1.0);
+	color = tex;
 }
