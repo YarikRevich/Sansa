@@ -6,7 +6,7 @@
 
 
 
-GLFWwindow* Sansa::Window::CreateWindow(const int width, const int height, const char *name)
+GLFWwindow* Sansa::Window::Create(const int width, const int height, const char *name)
 {
     Sansa::Logger::Init();
 

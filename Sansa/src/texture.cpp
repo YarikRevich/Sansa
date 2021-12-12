@@ -6,6 +6,8 @@ Sansa::Texture::Texture(const std::string &file) : m_FilePath(file)
 	stbi_set_flip_vertically_on_load(true);
 	m_LocalBuffer = stbi_load(file.c_str(), &m_Width, &m_Height, &m_BPP, 4);
 
+	std::cout << m_Width << std::endl;
+
 	GL_LOG(glGenTextures(1, &m_RendererID));
 	GL_LOG(glBindTexture(GL_TEXTURE_2D, m_RendererID));
 

@@ -32,7 +32,7 @@ using namespace Sansa;
 
 int main(int argc, char **argv)
 {
-    GLFWwindow *window = Window::CreateWindow(600, 800, "Sandbox");
+    GLFWwindow *window = Window::Create(600, 800, "Sandbox");
 
     //  -0.5f, -0.5f,  
     //     0.5f, -0.5f,   
@@ -96,7 +96,7 @@ int main(int argc, char **argv)
 
     Shader shader(ShaderLoader::LoadShader("../../Sandbox/shaders/base.glsl"));
 
-    Texture texture("textures/example.png");
+    Texture texture("../../Sandbox/textures/example.png");
     texture.Bind();
     
     shader.SetUniform1i("u_Texture", 0);

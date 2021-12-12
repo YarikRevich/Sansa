@@ -62,7 +62,7 @@ std::vector<Sansa::ShaderBundle> Sansa::ShaderLoader::LoadShadersInDir(const std
 
 	for (const auto &file : directory_iterator(dir))
 	{
-		b.push_back(LoadShader(file.path()));
+		b.push_back(LoadShader(file.path().string()));
 	};
 
 	return b;

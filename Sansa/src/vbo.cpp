@@ -20,5 +20,5 @@ void Sansa::VBO::Bind() const
 
 void Sansa::VBO::Unbind() const
 {
-	GL_LOG(glBindBuffer(GL_BUFFER, 0));
+	GL_LOG(glBindBuffer(GL_ARRAY_BUFFER, 0));
 }

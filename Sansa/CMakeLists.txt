@@ -1,6 +1,6 @@
 include_directories(include/)
 
-add_library(sansa SHARED 
+add_library(sansa STATIC 
             src/texture.cpp
             src/window.cpp 
             src/renderer.cpp 
@@ -11,10 +11,16 @@ add_library(sansa SHARED
             src/vbo.cpp
             src/objloader.cpp
             src/stb_image.cpp
-            )
+           
+)
+
+
+
 target_link_libraries(sansa 
-            libglfw.3.3.dylib
-            libglad.a)
+${LIBGLAD}
+            ${LIBGLFW}
+            )
+
 target_precompile_headers(sansa PUBLIC include/pch.hpp)
 
 set_property(TARGET sansa PROPERTY CXX_STANDARD 17)

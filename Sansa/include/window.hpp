@@ -8,7 +8,7 @@ namespace Sansa
     {
     public:
 
-       static GLFWwindow* CreateWindow(const int width, const int height, const char *name);
+       static GLFWwindow* Create(const int width, const int height, const char *name);
     };
    
 };
