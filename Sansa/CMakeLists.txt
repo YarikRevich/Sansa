@@ -10,16 +10,15 @@ add_library(sansa STATIC
             src/ib.cpp
             src/vbo.cpp
             src/objloader.cpp
-            src/stb_image.cpp
-           
-)
-
-
+            src/stb_image.cpp)
 
 target_link_libraries(sansa 
-${LIBGLAD}
-            ${LIBGLFW}
-            )
+            ${LIBGLAD}
+            ${LIBGLFW})
+
+if(APPLE)
+target_link_libraries(sansa "-framework Cocoa -framework IOKit -framework CoreVideo")
+endif()
 
 target_precompile_headers(sansa PUBLIC include/pch.hpp)
 
